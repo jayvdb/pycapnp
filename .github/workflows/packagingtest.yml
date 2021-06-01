@@ -13,11 +13,11 @@ jobs:
         # Some asyncio commands require 3.7+
         # It may be possible to use 3.6 and maybe 3.5; however, this will take some patching to get examples to work
         python-version: [3.9]
-        qemu-arch: [aarch64]
+        qemu-arch: [aarch64,armv7,ppc64le,s390x]
 
     steps:
     - uses: actions/checkout@v2
-    - uses: uraimo/run-on-arch-action@v2.0.5
+    - uses: uraimo/run-on-arch-action@v2.0.10
       name: Run commands
       id: runcmd
       with:
@@ -32,7 +32,7 @@ jobs:
         run: |
           echo ::set-output name=uname::$(uname -a)
           dnf -y update
-          dnf -y install python${{ matrix.python-version }}
+          dnf -y install cmake python${{ matrix.python-version }}
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py build
