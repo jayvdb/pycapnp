@@ -1,6 +1,6 @@
 name: manylinux2010
 
-on: [push, pull_request]
+on:
 
 jobs:
   manylinux2010:
