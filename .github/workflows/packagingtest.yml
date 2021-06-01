@@ -30,8 +30,11 @@ jobs:
 
         # Set an output parameter `uname` for use in subsequent steps
         run: |
-          uname -a
           echo ::set-output name=uname::$(uname -a)
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py build
+          pip install .
 
     - name: Get the output
       # Echo the `uname` output parameter from the `runcmd` step
