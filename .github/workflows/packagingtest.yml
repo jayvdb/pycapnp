@@ -22,7 +22,7 @@ jobs:
       id: runcmd
       with:
         arch: ${{ matrix.qemu-arch }}
-        distro: ubuntu18.04
+        distro: fedora_latest
 
         # Not required, but speeds up builds by storing container images in
         # a GitHub package registry.
@@ -31,6 +31,8 @@ jobs:
         # Set an output parameter `uname` for use in subsequent steps
         run: |
           echo ::set-output name=uname::$(uname -a)
+          dnf -y update
+          dnf -y install python${{ matrix.python-version }}
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py build
