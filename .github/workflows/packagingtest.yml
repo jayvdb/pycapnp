@@ -32,7 +32,7 @@ jobs:
         run: |
           echo ::set-output name=uname::$(uname -a)
           dnf -y update
-          dnf -y install cmake gcc-c++ python${{ matrix.python-version }}
+          dnf -y install cmake gcc-c++ python${{ matrix.python-version }}-devel
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py build
